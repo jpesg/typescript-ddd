@@ -13,13 +13,10 @@ module.exports = {
   },
   rules: {
     'no-console': 1,
-    quotes: [
-      'error',
-      'single',
-      { avoidEscape: true, allowTemplateLiterals: true },
-    ],
+    quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
     'eol-last': 0,
     'prettier/prettier': ['error', { singleQuote: true, semi: false }],
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/prefer-readonly': 'off',
   },
 }
