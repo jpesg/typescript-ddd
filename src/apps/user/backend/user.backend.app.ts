@@ -7,7 +7,11 @@ export class UserBackendApp {
     await this.server.listen()
   }
 
+  get httpServer() {
+    return this.server?.getHTTPServer()
+  }
+
   async stop() {
-    return await this.server?.stop()
+    await this.server?.stop()
   }
 }
