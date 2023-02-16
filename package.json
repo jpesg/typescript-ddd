@@ -4,7 +4,7 @@
   "description": "project example",
   "main": "index.js",
   "scripts": {
-    "dev:user:backend": "cross-env NODE_ENV=dev ts-node-dev --ignore-watch node_modules ./src/app/user/backend/start.ts",
+    "dev:user:backend": "cross-env NODE_ENV=dev ts-node-dev --ignore-watch node_modules ./src/apps/user/backend/start.ts",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "build": "tsc -p tsconfig.json",
     "dev": "cross-env NODE_ENV=dev tsnd --ignore-watch node_modules ./index.ts",
