@@ -4,12 +4,11 @@ module.exports = {
     es2021: true,
   },
   extends: ['standard-with-typescript', 'prettier'],
-  overrides: [],
   plugins: ['prettier'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: ['tsconfig.json'],
+    project: ['./tsconfig.json'],
   },
   rules: {
     'no-console': 1,
@@ -18,5 +17,12 @@ module.exports = {
     'prettier/prettier': ['error', { singleQuote: true, semi: false }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/prefer-readonly': 'off',
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      {
+        'checksConditionals': false,
+        'checksVoidReturn': false
+      }
+    ]
   },
 }
