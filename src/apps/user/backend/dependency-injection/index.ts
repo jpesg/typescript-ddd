@@ -1,17 +1,11 @@
-/* eslint-disable @typescript-eslint/no-floating-promises */
-import { ContainerBuilder } from 'node-dependency-injection'
+import * as aw from 'awilix'
+import { UserPutController, StatusGetController } from './apps/user'
+import { UserCreator, FileUserRepository } from './users'
 
-import { StatusGetController, UserPutController } from './apps/user'
-import { UserCreator } from '../../../../contexts/user/users/application/user.creator'
-import { FileUserRespository } from '../../../../contexts/user/users/infrastructure/persistence/file.user.respository.test'
-
-const container = new ContainerBuilder()
-
-container.register('Apps.user.controllers.StatusGetController', StatusGetController)
-container
-  .register('Apps.user.controllers.UserPutController', UserPutController)
-  .addArgument('Users.user.application.UserCreator')
-
-container.register('Users.user.domain.UserRepository', FileUserRespository)
-container.register('Users.user.application.UserCreator', UserCreator).addArgument('Users.user.domain.UserRepository')
-export { container }
+export const container = aw.createContainer({ injectionMode: 'CLASSIC' })
+container.register({
+  userRepository: aw.asClass(FileUserRepository).singleton(),
+  userCreator: aw.asClass(UserCreator),
+  statusGetController: aw.asClass(StatusGetController),
+  userPutController: aw.asClass(UserPutController),
+})

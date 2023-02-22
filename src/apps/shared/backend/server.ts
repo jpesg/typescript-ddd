@@ -3,7 +3,7 @@ import type * as http from 'http'
 import helmet from 'helmet'
 import httpStatus from 'http-status'
 import compression from 'compression'
-import { registerRoutes } from './routes'
+import { registerRoutes } from '../../user/backend/routes'
 
 export class Server {
   private express: express.Express

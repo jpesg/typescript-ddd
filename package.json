@@ -10,10 +10,10 @@
     "dev": "cross-env NODE_ENV=dev tsnd --ignore-watch node_modules ./index.ts",
     "lint": "eslint . --ext .ts",
     "format": "prettier --ignore-path .prettierignore --write \"**/*.+(js|ts|json)\"",
-    "test": "cross-env NODE_ENV=test npm run test:features",
+    "test": "npm run test:features",
     "test:unit": "cross-env NODE_ENV=test jest",
     "test:features": "npm run test:user:backend:features",
-    "test:user:backend:features": "cucumber-js -p user_backend"
+    "test:user:backend:features": "cross-env NODE_ENV=test cucumber-js -p user_backend"
   },
   "author": "",
   "license": "ISC",
@@ -43,6 +43,7 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
+    "awilix": "8.0.0",
     "bson": "5.0.1",
     "compression": "1.7.4",
     "cross-env": "7.0.3",
@@ -50,6 +51,8 @@
     "glob": "8.1.0",
     "helmet": "6.0.1",
     "http-status": "1.6.2",
-    "node-dependency-injection": "3.0.5"
+    "node-dependency-injection": "3.0.5",
+    "uuid": "9.0.0",
+    "zod": "3.20.6"
   }
 }

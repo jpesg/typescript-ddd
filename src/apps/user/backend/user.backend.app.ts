@@ -1,4 +1,4 @@
-import { Server } from './server'
+import { Server } from '../../shared/backend/server'
 export class UserBackendApp {
   server?: Server
   async start() {

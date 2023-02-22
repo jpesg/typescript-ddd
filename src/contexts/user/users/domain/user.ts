@@ -1,10 +1,12 @@
+import { type Uuid } from '../../../shared/doman/value-objects/uuid'
+
 export class User {
-  readonly uuid: string
+  readonly id: Uuid
   readonly email: string
   readonly password: string
 
-  constructor(params: { uuid: string; email: string; password: string }) {
-    this.uuid = params.uuid
+  constructor(params: { id: Uuid; email: string; password: string }) {
+    this.id = params.id
     this.email = params.email
     this.password = params.password
   }
