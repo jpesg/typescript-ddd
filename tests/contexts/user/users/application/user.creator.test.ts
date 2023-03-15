@@ -1,4 +1,4 @@
-import { UserCreator } from '../../../../../src/contexts/user/users/application/user.creator'
+import UserCreator from '../../../../../src/contexts/user/users/application/user.creator'
 import { UserRepositoryMock } from '../__mocks__/user.repository.mock'
 import { InvalidEmail } from '../../../../../src/contexts/user/users/domain/errors/invalid.email'
 import { CreateUserRequestMother } from './create.user.request.mother'

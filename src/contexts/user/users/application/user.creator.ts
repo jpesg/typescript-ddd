@@ -5,8 +5,8 @@ import { UserId } from '../../shared/domain/users/user.id'
 import { UserPassword } from '../domain/user.password'
 import { UserEmail } from '../domain/user.email'
 
-export class UserCreator {
-  constructor(private readonly userRepository: UserRepository) {}
+export default class UserCreator {
+  constructor(private userRepository: UserRepository) {}
   async run(request: UserCreatorRequest) {
     const user = new User({
       password: new UserPassword(request.password),

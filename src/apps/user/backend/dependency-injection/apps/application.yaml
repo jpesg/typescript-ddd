@@ -1,0 +1,10 @@
+services:
+
+  Apps.user.controllers.StatusGetController:
+    class: ../../controllers/status.get.controller
+    arguments: []
+
+  Apps.user.controllers.UserPutController:
+    class: ../../controllers/user.put.controller
+    arguments: ['@User.users.application.UserCreator']
+

@@ -1,4 +1,4 @@
-import { FileUserRepository } from '../../../../../../src/contexts/user/users/infrastructure/persistence/file.user.repository'
+import FileUserRepository from '../../../../../../src/contexts/user/users/infrastructure/persistence/file.user.repository'
 import { User } from '../../../../../../src/contexts/user/users/domain/user'
 import { Uuid } from '../../../../../../src/contexts/shared/doman/value-objects/uuid'
 import { UserId } from '../../../../../../src/contexts/user/shared/domain/users/user.id'

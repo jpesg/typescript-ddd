@@ -1,7 +1,7 @@
 import { type Controller } from '../../../shared/domain/controllers/controller'
 import httpStatus from 'http-status'
 import { type Response, type Request } from 'express'
-import { type UserCreator } from '../../../../contexts/user/users/application/user.creator'
+import type UserCreator from '../../../../contexts/user/users/application/user.creator'
 import { requestParser } from '../../../shared/infrastructure/request.validator'
 import { z } from 'zod'
 import { ValidationError } from '../../../shared/domain/errors/validation.error'
@@ -36,7 +36,7 @@ const schema = z.object({
       }),
   }),
 })
-export class UserPutController implements Controller {
+export default class UserPutController implements Controller {
   constructor(private readonly userCreator: UserCreator) {}
 
   async run(req: Request, res: Response): Promise<void> {

@@ -19,4 +19,12 @@ export class UserMother {
       password: UserPasswordMother.create(request.password),
     })
   }
+
+  static random(): User {
+    return this.create({
+      id: UserIdMother.random(),
+      email: UserEmailMother.random(),
+      password: UserPasswordMother.random(),
+    })
+  }
 }

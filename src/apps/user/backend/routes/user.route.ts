@@ -1,11 +1,11 @@
 import { type Router } from 'express'
-import { container } from '../dependency-injection'
-import { type UserPutController } from '../controllers/user.put.controller'
+import container from '../dependency-injection'
+import type UserPutController from '../controllers/user.put.controller'
 
 import { controllerFactory } from '../../../shared/backend/controller'
 
 const userRoutes = (router: Router) => {
-  const _controller: UserPutController = container.resolve<UserPutController>('userPutController')
+  const _controller: UserPutController = container.get('Apps.user.controllers.UserPutController')
   router.get('/', controllerFactory(_controller))
   router.put('/:uuid', controllerFactory(_controller))
 

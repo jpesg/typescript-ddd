@@ -1,0 +1,22 @@
+services:
+  User.MongoConfig:
+    factory:
+      class: ../../../../../contexts/user/shared/infrastructure/persistence/mongo/mongo.client.factory
+      method: 'createConfig'
+
+  User.ConnectionManager:
+    factory:
+      class: ../../../../../contexts/shared/infrastructure/persistence/mongo.client.factory
+      method: 'createClient'
+    arguments: [ 'user', '@User.MongoConfig' ]
+
+  User.users.domain.UserRepository:
+    class: ../../../../../contexts/user/users/infrastructure/persistence/mongo.user.repository
+    arguments: ['@User.ConnectionManager']
+    #class: ../../../../../contexts/user/users/infrastructure/persistence/file.user.repository
+    #arguments: [""]
+
+
+  User.users.application.UserCreator:
+    class: ../../../../../contexts/user/users/application/user.creator
+    arguments: ['@User.users.domain.UserRepository']

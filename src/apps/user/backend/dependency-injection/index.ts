@@ -1,11 +1,9 @@
-import * as aw from 'awilix'
-import { UserPutController, StatusGetController } from './apps/user'
-import { UserCreator, FileUserRepository } from './users'
+import { ContainerBuilder, YamlFileLoader } from 'node-dependency-injection'
 
-export const container = aw.createContainer({ injectionMode: 'CLASSIC' })
-container.register({
-  userRepository: aw.asClass(FileUserRepository).singleton(),
-  userCreator: aw.asClass(UserCreator),
-  statusGetController: aw.asClass(StatusGetController),
-  userPutController: aw.asClass(UserPutController),
-})
+const container = new ContainerBuilder()
+const loader = new YamlFileLoader(container)
+const env = process.env.NODE_ENV ?? 'dev'
+
+// eslint-disable-next-line n/no-path-concat
+loader.load(`${__dirname}/application_${env}.yaml`)
+export default container
