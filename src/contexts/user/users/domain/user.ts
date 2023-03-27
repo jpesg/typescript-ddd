@@ -8,19 +8,15 @@ export class User extends AggregateRoot {
   readonly email: UserEmail
   readonly password: UserPassword
 
-  constructor(params: { id: UserId; email: UserEmail; password: UserPassword }) {
+  constructor(id: UserId, email: UserEmail, password: UserPassword) {
     super()
-    this.id = params.id
-    this.email = params.email
-    this.password = params.password
+    this.id = id
+    this.email = email
+    this.password = password
   }
 
   static fromPrimitives(plainData: { id: string; email: string; password: string }): User {
-    return new User({
-      id: new UserId(plainData.id),
-      email: new UserEmail(plainData.email),
-      password: new UserPassword(plainData.password),
-    })
+    return new User(new UserId(plainData.id), new UserEmail(plainData.email), new UserPassword(plainData.password))
   }
 
   toPrimitives(): any {

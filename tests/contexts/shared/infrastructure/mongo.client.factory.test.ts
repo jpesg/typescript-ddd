@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb'
-import MongoClientFactory from '../../../../src/contexts/shared/infrastructure/persistence/mongo.client.factory'
-import { type MongoConfig } from '../../../../src/contexts/shared/infrastructure/persistence/mongo.config'
+import MongoClientFactory from '../../../../src/contexts/shared/infrastructure/persistence/mongo/mongo.client.factory'
+import { type MongoConfig } from '../../../../src/contexts/shared/infrastructure/persistence/mongo/mongo.config'
 import { userConfig } from '../../../../src/contexts/user/shared/infrastructure/config'
 
 const config: MongoConfig = userConfig.mongo

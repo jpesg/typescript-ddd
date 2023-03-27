@@ -1,4 +1,4 @@
-import { MongoRepository } from '../../../../shared/infrastructure/persistence/mongo.repository'
+import { MongoRepository } from '../../../../shared/infrastructure/persistence/mongo/mongo.repository'
 import { type UserRepository } from '../../domain/user.repository'
 import { User } from '../../domain/user'
 import { type UserId } from '../../../shared/domain/users/user.id'

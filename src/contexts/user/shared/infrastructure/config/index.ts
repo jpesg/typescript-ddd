@@ -9,6 +9,12 @@ const envVarsSchema = z.object({
   MONGODB_AUTHDB: z.string(),
   MONGODB_SERVER: z.string(),
   MONGODB_PORT: z.string(),
+
+  POSTGRES_HOST: z.string(),
+  POSTGRES_PORT: z.number(),
+  POSTGRES_USERNAME: z.string(),
+  POSTGRES_PASSWORD: z.string(),
+  POSTGRES_DATABASE: z.string(),
 })
 const envVars = envVarsSchema.parse(process.env)
 
@@ -21,6 +27,13 @@ export const userConfig = {
     authDb: envVars.MONGODB_AUTHDB,
     server: envVars.MONGODB_SERVER,
     port: envVars.MONGODB_PORT,
+  },
+  typeOrm: {
+    host: envVars.POSTGRES_HOST,
+    port: envVars.POSTGRES_PORT,
+    username: envVars.POSTGRES_USERNAME,
+    password: envVars.POSTGRES_PASSWORD,
+    database: envVars.POSTGRES_DATABASE,
   },
 }
 if (userConfig.env === 'test') {

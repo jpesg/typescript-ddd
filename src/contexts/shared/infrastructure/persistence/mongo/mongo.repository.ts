@@ -1,5 +1,5 @@
 import { type Collection, type MongoClient } from 'mongodb'
-import { type AggregateRoot } from '../../doman/aggregate.root'
+import { type AggregateRoot } from '../../../doman/aggregate.root'
 
 export abstract class MongoRepository<T extends AggregateRoot> {
   constructor(private _client: Promise<MongoClient>) {}

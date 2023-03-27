@@ -1,17 +1,17 @@
 services:
-  User.TypeOrmConfig:
+  User.MongoConfig:
     factory:
-      class: ../../../../../contexts/user/shared/infrastructure/persistence/typeorm/typeorm.client.factory
+      class: ../../../../../contexts/user/shared/infrastructure/persistence/mongo/mongo.client.factory
       method: 'createConfig'
 
   User.ConnectionManager:
     factory:
-      class: ../../../../../contexts/shared/infrastructure/persistence/typeorm/typeorm.client.factory
+      class: ../../../../../contexts/shared/infrastructure/persistence/mongo.client.factory
       method: 'createClient'
-    arguments: [ 'user', '@User.TypeOrmConfig' ]
+    arguments: [ 'user', '@User.MongoConfig' ]
 
   User.users.domain.UserRepository:
-    class: ../../../../../contexts/user/users/infrastructure/persistence/typeorm.user.repository
+    class: ../../../../../contexts/user/users/infrastructure/persistence/mongo.user.repository
     arguments: ['@User.ConnectionManager']
     #class: ../../../../../contexts/user/users/infrastructure/persistence/file.user.repository
     #arguments: [""]
