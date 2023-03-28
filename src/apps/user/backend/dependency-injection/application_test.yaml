@@ -2,5 +2,5 @@ imports:
   - { resource: ./application.yaml }
 services:
   User.EnvironmentArranger:
-    class: ../../../../../tests/Contexts/Shared/infrastructure/mongo/mongo.environment.arranger
+    class: ../../../../../tests/Contexts/Shared/infrastructure/typeorm/typeorm.environment.arranger
     arguments: ['@User.ConnectionManager']
