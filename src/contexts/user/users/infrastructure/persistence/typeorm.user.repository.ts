@@ -1,10 +1,10 @@
 import { type UserRepository } from '../../domain/user.repository'
 import { type User } from '../../domain/user'
 import { type UserId } from '../../../shared/domain/users/user.id'
-import { type Nullable } from '../../../../shared/doman/nullable'
 import { type EntitySchema } from 'typeorm'
 import { UserEntity } from './typeorm/user.entity'
 import { TypeormRepository } from '../../../../shared/infrastructure/persistence/typeorm/typeorm.repository'
+import { type Nullable } from '../../../../shared/domain/nullable'
 
 export class TypeormUserRepository extends TypeormRepository<User> implements UserRepository {
   public async save(user: User): Promise<void> {

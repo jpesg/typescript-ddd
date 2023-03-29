@@ -2,7 +2,7 @@ import { MongoRepository } from '../../../../shared/infrastructure/persistence/m
 import { type UserRepository } from '../../domain/user.repository'
 import { User } from '../../domain/user'
 import { type UserId } from '../../../shared/domain/users/user.id'
-import { type Nullable } from '../../../../shared/doman/nullable'
+import { type Nullable } from '../../../../shared/domain/nullable'
 
 interface UserDocument {
   _id: string

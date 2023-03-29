@@ -1,6 +1,6 @@
-import { StringValueObject } from '../../../shared/doman/value-objects/string.value.object'
 import { z } from 'zod'
 import { InvalidEmail } from './errors/invalid.email'
+import { StringValueObject } from '../../../shared/domain/value-objects/string.value.object'
 
 export class UserEmail extends StringValueObject {
   constructor(value: string) {

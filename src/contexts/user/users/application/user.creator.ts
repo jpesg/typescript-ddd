@@ -4,15 +4,13 @@ import { type UserCreatorRequest } from './user.creator.request'
 import { UserId } from '../../shared/domain/users/user.id'
 import { UserPassword } from '../domain/user.password'
 import { UserEmail } from '../domain/user.email'
+import { type EventBus } from '../../../shared/domain/event.bus'
 
 export default class UserCreator {
-  constructor(private userRepository: UserRepository) {}
+  constructor(private userRepository: UserRepository, private eventBus: EventBus) {}
   async run(request: UserCreatorRequest) {
-    const user = new User({
-      password: new UserPassword(request.password),
-      email: new UserEmail(request.email),
-      id: new UserId(request.id),
-    })
+    const user = User.create(new UserId(request.id), new UserEmail(request.email), new UserPassword(request.password))
     await this.userRepository.save(user)
+    await this.eventBus.publish(user.pullDomainEvents())
   }
 }

@@ -1,3 +1,3 @@
-import { StringValueObject } from '../../../shared/doman/value-objects/string.value.object'
+import { StringValueObject } from '../../../shared/domain/value-objects/string.value.object'
 
 export class UserPassword extends StringValueObject {}
