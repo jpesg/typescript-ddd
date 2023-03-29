@@ -1,0 +1,16 @@
+services:
+
+  Mooc.Shared.MongoConfig:
+    factory:
+      class: ../../../../../contexts/mooc/shared/infrastructure/persistence/mongo/mongo.config.factory
+      method: 'createConfig'
+
+  Mooc.Shared.domain.EventBus:
+    class: ../../../../../contexts/shared/infrastructure/eventbus/inmemory/in.memory.async.event.bus
+    arguments: []
+
+  Mooc.Shared.ConnectionManager:
+    factory:
+      class: ../../../../../contexts/shared/infrastructure/persistence/mongo/mongo.client.factory
+      method: 'createClient'
+    arguments: ['mooc', '@Mooc.Shared.MongoConfig']
