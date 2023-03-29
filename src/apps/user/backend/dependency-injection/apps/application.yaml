@@ -8,3 +8,7 @@ services:
     class: ../../controllers/user.put.controller
     arguments: ['@User.users.application.UserCreator']
 
+  Apps.mooc.controllers.UsersCounterGetController:
+    class: ../../controllers/users.counter.get.controller
+    arguments: [ "@Mooc.UsersCounter.UsersCounterFinder" ]
+
