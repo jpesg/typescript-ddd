@@ -8,23 +8,19 @@ import { UserPasswordMother } from './user.password.mother'
 import { UserIdMother } from '../../shared/domain/users/user.id.mother'
 
 export class UserMother {
-  static create(args: { id: UserId; email: UserEmail; password: UserPassword }) {
-    return new User(args)
+  static create(id: UserId, email: UserEmail, password: UserPassword) {
+    return new User(id, email, password)
   }
 
   static fromRequest(request: UserCreatorRequest): User {
-    return this.create({
-      id: UserIdMother.create(request.id),
-      email: UserEmailMother.create(request.email),
-      password: UserPasswordMother.create(request.password),
-    })
+    return this.create(
+      UserIdMother.create(request.id),
+      UserEmailMother.create(request.email),
+      UserPasswordMother.create(request.password)
+    )
   }
 
   static random(): User {
-    return this.create({
-      id: UserIdMother.random(),
-      email: UserEmailMother.random(),
-      password: UserPasswordMother.random(),
-    })
+    return this.create(UserIdMother.random(), UserEmailMother.random(), UserPasswordMother.random())
   }
 }

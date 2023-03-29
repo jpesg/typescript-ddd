@@ -2,7 +2,7 @@ import UserCreator from '../../../../../src/contexts/user/users/application/user
 import { UserRepositoryMock } from '../__mocks__/user.repository.mock'
 import { InvalidEmail } from '../../../../../src/contexts/user/users/domain/errors/invalid.email'
 import { CreateUserRequestMother } from './create.user.request.mother'
-import { UserMother } from '../domain/uer.mother'
+import { UserMother } from '../domain/user.mother'
 import EventBusMock from '../__mocks__/event.bus.mock'
 import { UserCreatedDomainEventMother } from '../domain/user.created.domain.event.mother'
 

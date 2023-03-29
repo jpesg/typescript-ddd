@@ -11,7 +11,7 @@ const envVarsSchema = z.object({
   MONGODB_PORT: z.string(),
 
   POSTGRES_HOST: z.string(),
-  POSTGRES_PORT: z.number(),
+  POSTGRES_PORT: z.string(),
   POSTGRES_USERNAME: z.string(),
   POSTGRES_PASSWORD: z.string(),
   POSTGRES_DATABASE: z.string(),
@@ -38,4 +38,5 @@ export const userConfig = {
 }
 if (userConfig.env === 'test') {
   userConfig.mongo.database = userConfig.mongo.database + '-test'
+  userConfig.typeOrm.database = userConfig.typeOrm.database + '-test'
 }

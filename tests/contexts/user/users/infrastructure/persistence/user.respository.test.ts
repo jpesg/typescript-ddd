@@ -1,7 +1,7 @@
 import container from '../../../../../../src/apps/user/backend/dependency-injection'
 import { type UserRepository } from '../../../../../../src/contexts/user/users/domain/user.repository'
 import { type EnvironmentArranger } from '../../../../shared/infrastructure/arranger/environment.arranger'
-import { UserMother } from '../../domain/uer.mother'
+import { UserMother } from '../../domain/user.mother'
 
 const repository: UserRepository = container.get('User.users.domain.UserRepository')
 const environmentArranger: Promise<EnvironmentArranger> = container.get('User.EnvironmentArranger')
