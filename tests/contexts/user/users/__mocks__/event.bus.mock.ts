@@ -1,6 +1,6 @@
 import { type EventBus } from '../../../../../src/contexts/shared/domain/event.bus'
 import { type DomainEvent } from '../../../../../src/contexts/shared/domain/domain.event'
-import { type DomainEventSubscriber } from '../../../../../src/contexts/shared/domain/domain.event.subscriber'
+import { type DomainEventSubscribers } from '../../../../../src/contexts/shared/infrastructure/event-bus/domain.event.subscribers'
 
 export default class EventBusMock implements EventBus {
   private publishSpy = jest.fn()
@@ -9,7 +9,7 @@ export default class EventBusMock implements EventBus {
     this.publishSpy(events)
   }
 
-  addSubscribers(subscribers: Array<DomainEventSubscriber<DomainEvent>>): void {}
+  addSubscribers(subscribers: DomainEventSubscribers): void {}
 
   assertLastPublishedEventIs(expectedEvent: DomainEvent) {
     const publishSpyCalls = this.publishSpy.mock.calls
