@@ -8,7 +8,7 @@ export class TypeOrmClientFactory {
         name: contextName,
         type: 'postgres',
         host: config.host,
-        port: config.port,
+        port: Number(config.port),
         username: config.username,
         password: config.password,
         database: config.database,

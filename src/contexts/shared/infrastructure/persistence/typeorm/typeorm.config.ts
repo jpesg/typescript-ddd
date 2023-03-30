@@ -1,6 +1,6 @@
 export interface TypeOrmConfig {
   host: string
-  port: number
+  port: string
   username: string
   password: string
   database: string

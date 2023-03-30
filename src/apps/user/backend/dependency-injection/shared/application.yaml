@@ -1,4 +1,8 @@
 services:
+  Mooc.TypeOrmConfig:
+    factory:
+      class: ../../../../../Contexts/Mooc/Shared/infrastructure/persistence/postgres/type.orm.config.factory
+      method: 'createConfig'
 
   Mooc.Shared.MongoConfig:
     factory:
