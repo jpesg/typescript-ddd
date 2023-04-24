@@ -1,0 +1,12 @@
+services:
+
+  Apps.Backoffice.Backend.controllers.StatusGetController:
+    class: ../../controllers/status.get.controller
+    arguments: []
+  Apps.Backoffice.Backend.controllers.UsersPostController:
+    class: ../../controllers/users.post.controller
+    arguments: ['@Backoffice.Shared.domain.CommandBus']
+
+  Apps.Backoffice.Backend.controllers.UsersGetController:
+    class: ../../controllers/users.get.controller
+    arguments: [ '@Backoffice.Shared.domain.QueryBus' ]

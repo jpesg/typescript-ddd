@@ -1,10 +1,12 @@
 import { type Controller } from '../../../shared/domain/controllers/controller'
 import httpStatus from 'http-status'
 import { type Response, type Request } from 'express'
-import type UserCreator from '../../../../contexts/user/users/application/user.creator'
+// import type UserCreator from '../../../../contexts/user/users/application/user.creator'
 import { requestParser } from '../../../shared/infrastructure/request.validator'
 import { z } from 'zod'
 import { ValidationError } from '../../../shared/domain/errors/validation.error'
+import { type CommandBus } from '../../../../contexts/shared/domain/command.bus'
+import { CreateUserCommand } from '../../../../contexts/user/users/domain/create.user.command'
 
 const schema = z.object({
   body: z.object({
@@ -37,7 +39,8 @@ const schema = z.object({
   }),
 })
 export default class UserPutController implements Controller {
-  constructor(private readonly userCreator: UserCreator) {}
+  // constructor(private readonly userCreator: UserCreator) {}
+  constructor(private readonly commandBus: CommandBus) {}
 
   async run(req: Request, res: Response): Promise<void> {
     try {
@@ -45,7 +48,8 @@ export default class UserPutController implements Controller {
 
       const { email, password, id } = body
 
-      await this.userCreator.run({ id, email, password })
+      // await this.userCreator.run({ id, email, password })
+      await this.commandBus.dispatch(new CreateUserCommand({ id, email, password }))
       res.status(httpStatus.CREATED).send()
     } catch (error) {
       if (error instanceof ValidationError) {

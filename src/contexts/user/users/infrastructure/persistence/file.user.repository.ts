@@ -13,4 +13,8 @@ export default class FileUserRepository implements UserRepository {
   private filePath(uuid: string) {
     return `${this.FILE_PATH}.${uuid}.repo`
   }
+
+  async searchAll(): Promise<User[]> {
+    return []
+  }
 }

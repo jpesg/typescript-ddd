@@ -1,23 +1,23 @@
 services:
-  Mooc.UsersCounter.UsersCounterRepository:
-    class: ../../../../../contexts/mooc/users-counter/infrastructure/persistence/mongo/mongo.users.counter.repository
-    arguments: ["@Mooc.Shared.ConnectionManager"]
+  User.UsersCounter.UsersCounterRepository:
+    class: ../../../../../contexts/user/users-counter/infrastructure/persistence/mongo/mongo.users.counter.repository
+    arguments: ["@User.Shared.ConnectionManager"]
 
-  Mooc.UsersCounter.UsersCounterIncrementer:
-    class: ../../../../../contexts/mooc/users-counter/application/increment/users.counter.incrementer
+  User.UsersCounter.UsersCounterIncrementer:
+    class: ../../../../../contexts/user/users-counter/application/increment/users.counter.incrementer
     arguments: [
-      "@Mooc.UsersCounter.UsersCounterRepository",
-      "@Mooc.Shared.domain.EventBus"
+      "@User.UsersCounter.UsersCounterRepository",
+      "@User.Shared.domain.EventBus"
       ]
 
-  Mooc.UsersCounter.IncrementUsersCounterOnCourseCreated:
-    class: ../../../../../contexts/mooc/users-counter/application/increment/increment.users.counter.on.user.created
-    arguments: ["@Mooc.UsersCounter.UsersCounterIncrementer"]
+  User.UsersCounter.IncrementUsersCounterOnCourseCreated:
+    class: ../../../../../contexts/user/users-counter/application/increment/increment.users.counter.on.user.created
+    arguments: ["@User.UsersCounter.UsersCounterIncrementer"]
     tags:
       - { name: 'domainEventSubscriber' }
 
-  Mooc.UsersCounter.UsersCounterFinder:
-    class: ../../../../../contexts/mooc/users-counter/application/find/users.counter.finder
-    arguments: ["@Mooc.UsersCounter.UsersCounterRepository"]
+  User.UsersCounter.UsersCounterFinder:
+    class: ../../../../../contexts/user/users-counter/application/find/users.counter.finder
+    arguments: ["@User.UsersCounter.UsersCounterRepository"]
 
 

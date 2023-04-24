@@ -19,4 +19,10 @@ services:
 
   User.users.application.UserCreator:
     class: ../../../../../contexts/user/users/application/user.creator
-    arguments: ['@User.users.domain.UserRepository']
+    arguments: ['@User.users.domain.UserRepository', '@User.shared.domain.EventBus']
+
+  User.courses.CreateCourseCommandHandler:
+    class: ../../../../../contexts/user/users/application/create.user.command.handler
+    arguments: [ '@User.users.application.UserCreator' ]
+    tags:
+      - { name: 'commandHandler' }

@@ -1,0 +1,38 @@
+services:
+  Backoffice.Users.domain.UserRepository:
+    class: ../../../../../contexts/user/users/infrastructure/persistence/mongo.user.repository
+    arguments: ['@Backoffice.Shared.ConnectionManager']
+
+  Backoffice.Users.application.UserCreator:
+    class: ../../../../../contexts/user/users/application/user.creator
+    arguments: ['@Backoffice.Users.domain.UserRepository', '@Backoffice.Shared.domain.EventBus']
+
+  Backoffice.Users.CreateUserCommandHandler:
+    class: ../../../../../contexts/user/users/application/create.user.command.handler
+    arguments: ['@Backoffice.Users.application.UserCreator']
+    tags:
+      - { name: 'commandHandler' }
+
+  Backoffice.Users.application.UsersFinder:
+    class: ../../../../../contexts/user/users/application/search-all/user.finder
+    arguments: ['@Backoffice.Users.domain.UserRepository']
+
+  Backoffice.Users.SearchAllUsersQueryHandler:
+    class: ../../../../../contexts/user/users/application/search-all/search.all.users.query.handler
+    arguments: ['@Backoffice.Users.application.UsersFinder']
+    tags:
+      - { name: 'queryHandler' }
+  
+  Backoffice.Users.domain.BackofficeUserRepository:
+    class: ../../../../../contexts/backoffice/users/infrastructure/persistence/mongo.backoffice.user.repository
+    arguments: [ '@Backoffice.Shared.ConnectionManager' ]
+    
+  Backoffice.Users.application.BackofficeUserCreator:
+    class: ../../../../../contexts/backoffice/users/application/create/backoffice.user.creator
+    arguments: [ '@Backoffice.Users.domain.BackofficeUserRepository' ]
+    
+  Backoffice.Users.CreateBackofficeUserOnUserCreated:
+    class: ../../../../../contexts/backoffice/users/application/create/create.backoffice.user.on.user.created
+    arguments: [ '@Backoffice.Users.application.BackofficeUserCreator' ]
+    tags:
+      - { name: 'domainEventSubscriber' } 

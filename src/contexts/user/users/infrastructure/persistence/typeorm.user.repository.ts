@@ -19,4 +19,12 @@ export class TypeormUserRepository extends TypeormRepository<User> implements Us
   protected entitySchema(): EntitySchema<User> {
     return UserEntity
   }
+
+  public async searchAll(): Promise<User[]> {
+    const repository = await this.repository()
+
+    const users = await repository.find()
+
+    return users
+  }
 }

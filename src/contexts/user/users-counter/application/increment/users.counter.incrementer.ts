@@ -9,8 +9,9 @@ export class UsersCounterIncrementer {
 
   async run(userId: UserId) {
     const counter = (await this.repository.search()) ?? this.initializeCounter()
-
-    counter.increment(userId)
+    if (!counter.hasIncremented(userId)) {
+      counter.increment(userId)
+    }
 
     await this.repository.save(counter)
     await this.bus.publish(counter.pullDomainEvents())

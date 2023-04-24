@@ -13,4 +13,10 @@ export default class UserCreator {
     await this.userRepository.save(user)
     await this.eventBus.publish(user.pullDomainEvents())
   }
+
+  async runCommand(params: { id: UserId; email: UserEmail; password: UserPassword }) {
+    const user = User.create(params.id, params.email, params.password)
+    await this.userRepository.save(user)
+    await this.eventBus.publish(user.pullDomainEvents())
+  }
 }

@@ -6,8 +6,8 @@ import { type Nullable } from '../../../../shared/domain/nullable'
 
 interface UserDocument {
   _id: string
-  name: string
-  duration: string
+  email: string
+  password: string
 }
 
 export default class MongoUserRepository extends MongoRepository<User> implements UserRepository {
@@ -27,5 +27,14 @@ export default class MongoUserRepository extends MongoRepository<User> implement
 
   protected collectionName(): string {
     return 'users'
+  }
+
+  public async searchAll(): Promise<User[]> {
+    const collection = await this.collection()
+    const documents = await collection.find<UserDocument>({}).toArray()
+
+    return documents.map((document) =>
+      User.fromPrimitives({ email: document.email, password: document.password, id: document._id })
+    )
   }
 }

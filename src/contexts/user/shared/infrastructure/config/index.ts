@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv'
 import { z } from 'zod'
+
 dotenv.config()
 const envVarsSchema = z.object({
   NODE_ENV: z.string(),
@@ -15,6 +16,14 @@ const envVarsSchema = z.object({
   POSTGRES_USERNAME: z.string(),
   POSTGRES_PASSWORD: z.string(),
   POSTGRES_DATABASE: z.string(),
+
+  RABBITMQ_USERNAME: z.string().default('guest'),
+  RABBITMQ_PASSWORD: z.string().default('guest'),
+  RABBITMQ_VHOST: z.string().default('/'),
+  RABBITMQ_SECURE: z.boolean().default(false),
+  RABBITMQ_HOSTNAME: z.string().default('localhost'),
+  RABBITMQ_PORT: z.number().default(5672),
+  RABBITMQ_EXCHANGE_NAME: z.string().default('domain_events'),
 })
 const envVars = envVarsSchema.parse(process.env)
 
@@ -34,6 +43,23 @@ export const userConfig = {
     username: envVars.POSTGRES_USERNAME,
     password: envVars.POSTGRES_PASSWORD,
     database: envVars.POSTGRES_DATABASE,
+  },
+  rabbitmq: {
+    connectionSettings: {
+      username: envVars.RABBITMQ_USERNAME,
+      password: envVars.RABBITMQ_PASSWORD,
+      vhost: envVars.RABBITMQ_VHOST,
+      connection: {
+        secure: envVars.RABBITMQ_SECURE,
+        hostname: envVars.RABBITMQ_HOSTNAME,
+        port: envVars.RABBITMQ_PORT,
+      },
+    },
+    exchangeSettings: {
+      name: envVars.RABBITMQ_EXCHANGE_NAME,
+    },
+    maxRetries: 5,
+    retryTtl: 10,
   },
 }
 if (userConfig.env === 'test') {

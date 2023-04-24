@@ -3,7 +3,7 @@ import { type DomainEventSubscriber } from '../../domain/domain.event.subscriber
 import { type DomainEvent } from '../../domain/domain.event'
 
 export class DomainEventSubscribers {
-  private constructor(public items: Array<DomainEventSubscriber<DomainEvent>>) {}
+  constructor(public items: Array<DomainEventSubscriber<DomainEvent>>) {}
 
   static from(container: ContainerBuilder): DomainEventSubscribers {
     const subscriberDefinitions = container.findTaggedServiceIds('domainEventSubscriber') as Map<string, Definition>

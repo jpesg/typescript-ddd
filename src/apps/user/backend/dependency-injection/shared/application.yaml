@@ -1,20 +1,48 @@
 services:
-  Mooc.TypeOrmConfig:
+  User.TypeOrmConfig:
     factory:
-      class: ../../../../../Contexts/Mooc/Shared/infrastructure/persistence/postgres/type.orm.config.factory
+      class: ../../../../../Contexts/user/Shared/infrastructure/persistence/postgres/type.orm.config.factory
       method: 'createConfig'
 
-  Mooc.Shared.MongoConfig:
+  User.Shared.MongoConfig:
     factory:
-      class: ../../../../../contexts/mooc/shared/infrastructure/persistence/mongo/mongo.config.factory
+      class: ../../../../../contexts/user/shared/infrastructure/persistence/mongo/mongo.config.factory
       method: 'createConfig'
 
-  Mooc.Shared.domain.EventBus:
+  User.Shared.domain.EventBus:
     class: ../../../../../contexts/shared/infrastructure/eventbus/inmemory/in.memory.async.event.bus
     arguments: []
 
-  Mooc.Shared.ConnectionManager:
+  User.Shared.ConnectionManager:
     factory:
       class: ../../../../../contexts/shared/infrastructure/persistence/mongo/mongo.client.factory
       method: 'createClient'
-    arguments: ['mooc', '@Mooc.Shared.MongoConfig']
+    arguments: ['user', '@User.User.MongoConfig']
+
+  User.Shared.RabbitMQQueueFormatter:
+    class: ../../../../../contexts/shared/infrastructure/event-bus/rabbitmq/rabbitmq.queue.formatter
+    arguments: ['user']
+
+  User.Shared.RabbitMQConnection:
+    class: ../../../../../contexts/shared/infrastructure/event-bus/rabbitmq/rabbitmq.connection
+    arguments: ['@User.Shared.RabbitMQConfig']
+
+  User.Shared.RabbitMQqueueFormatter:
+    class: ../../../../../contexts/shared/infrastructure/event-bus/rabbitmq/rabbitmq.queue.formatter
+    arguments: ['user']
+
+  User.Shared.RabbitMQConfigurer:
+    class: ../../../../../contexts/shared/infrastructure/event-bus/rabbitmq/rabbitmq.configurer
+    arguments: ["@User.Shared.RabbitMQConnection", "@User.Shared.RabbitMQQueueFormatter"]
+
+  User.Shared.DomainEventFailoverPublisher:
+    class: ../../../../../contexts/shared/infrastructure/event-bus/domain-event-failover-publisher/domain.event.failover.publisher
+    arguments: ['@User.Shared.ConnectionManager']
+
+  Shared.CommandHandlers:
+    class: ../../../../../contexts/shared/infrastructure/command-bus/command.handlers
+    arguments: ['!tagged commandHandler']
+
+  Shared.CommandBus:
+    class: ../../../../../contexts/shared/infrastructure/command-bus/in.memory.command.bus
+    arguments: ['@Shared.CommandHandlers']
